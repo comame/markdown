@@ -1,6 +1,6 @@
 # markdown
 
-An simplefied markdown parser written in go.
+An simplefied GitHub-like markdown parser written in go.
 
 # Markdown spec (non-exhaustive)
 
