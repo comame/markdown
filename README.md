@@ -8,6 +8,8 @@ An simplefied GitHub-like markdown parser written in go.
 - Blocks are bounded by blank lines
 - Blocks except lists does not contain blocks
 
+<!-- -->
+
 - Escaping by backslash are always done (including text in Code blocks, Autolinks etc.)
 - Thematic breaks is only `---`
 - Spaces at the end of lines are ignored
