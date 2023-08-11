@@ -44,11 +44,6 @@ const (
 	TPipe  TokenType = "|"
 	TColon TokenType = ":"
 
-	TDetailBegin  TokenType = "<detail>"
-	TDetailEnd    TokenType = "</detail>"
-	TSummaryBegin TokenType = "<summary>"
-	TSummaryEnd   TokenType = "</summary>"
-
 	TSpace TokenType = " "
 	TBreak TokenType = "\n"
 
@@ -163,20 +158,6 @@ func Analyze(md string) []Token {
 		case md[i] == ':':
 			symbolToken = tokenOf(TColon)
 			i += 1
-
-		case substr(md, i, 8) == "<detail>":
-			symbolToken = tokenOf(TDetailBegin)
-			i += 8
-		case substr(md, i, 9) == "</detail>":
-			symbolToken = tokenOf(TDetailEnd)
-			i += 9
-
-		case substr(md, i, 9) == "<summary>":
-			symbolToken = tokenOf(TSummaryBegin)
-			i += 9
-		case substr(md, i, 10) == "</summary>":
-			symbolToken = tokenOf(TSummaryEnd)
-			i += 10
 
 		case md[i] == ' ':
 			symbolToken = tokenOf(TSpace)
