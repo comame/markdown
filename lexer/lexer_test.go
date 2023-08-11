@@ -73,6 +73,21 @@ func TestAnalyze_OrderList(t *testing.T) {
 	}
 }
 
+func TestToString(t *testing.T) {
+	md := "# heading1\n" +
+		"paragraph 1\n" +
+		"1. list\n" +
+		"2. list\n" +
+		"paragraph"
+
+	tokens := Analyze(md)
+	got := TokensToString(tokens)
+
+	if got != md {
+		t.Fail()
+	}
+}
+
 func textToken(str string) Token {
 	return Token{
 		Type:  TText,

@@ -15,7 +15,7 @@ _italic and **bold**_
 
 `inline code`
 
-[link](https://example.com) ![image](https://example.com) <https://example.com>
+[link](https://example.com) ![image](https://example.com) <https://example.com> <br>
 
 Escape \`backquote`
 
@@ -23,6 +23,8 @@ Escape \`backquote`
 
 > Multiline
 > Blockquote
+
+---
 
 ```tag
 Code

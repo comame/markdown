@@ -38,7 +38,8 @@ const (
 	TBackquote1 TokenType = "`"
 	TBackquote3 TokenType = "```"
 
-	THyphen    TokenType = "-"
+	THyphen1   TokenType = "-"
+	THyphen3   TokenType = "---"
 	TOrderList TokenType = "1."
 
 	TPipe  TokenType = "|"
@@ -148,8 +149,11 @@ func Analyze(md string) []Token {
 			symbolToken = tokenOf(TBackquote1)
 			i += 1
 
+		case substr(md, i, 3) == "---":
+			symbolToken = tokenOf(THyphen3)
+			i += 3
 		case md[i] == '-':
-			symbolToken = tokenOf(THyphen)
+			symbolToken = tokenOf(THyphen1)
 			i += 1
 
 		case md[i] == '|':
@@ -182,7 +186,11 @@ func Analyze(md string) []Token {
 		orderListReg := regexp.MustCompile(`^\d+\.`)
 		orderListMatch := orderListReg.FindString(md[i:])
 		if orderListMatch != "" {
-			tokens = append(tokens, *tokenOf(TOrderList))
+			t := Token{
+				Type:  TOrderList,
+				Value: orderListMatch,
+			}
+			tokens = append(tokens, t)
 			i += len(orderListMatch)
 			continue
 		}
@@ -205,6 +213,9 @@ func Analyze(md string) []Token {
 
 func (t *Token) String() string {
 	if t.Type == TText {
+		return t.Value
+	}
+	if t.Type == TOrderList {
 		return t.Value
 	}
 	return string(t.Type)
