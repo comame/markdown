@@ -1,4 +1,3 @@
-// lexier はアレです
 package lexier
 
 import "regexp"
@@ -8,6 +7,7 @@ type Token struct {
 	Value string
 }
 
+// デバッグしやすいように、iota ではなくトークンをよく表す文字列を用いる
 type TokenType string
 
 const (
@@ -68,6 +68,7 @@ func Analyze(md string) []Token {
 			break
 		}
 
+		// エスケープされていたら、通常の文字 TText とみなす
 		if escaped {
 			if stringToken == nil {
 				stringToken = tokenOf(TText)
@@ -185,6 +186,7 @@ func Analyze(md string) []Token {
 			i += 1
 		}
 
+		// 記号トークンだったら、直前の TText を閉じてから、記号トークンを配列に入れる
 		if symbolToken != nil {
 			if stringToken != nil {
 				tokens = append(tokens, *stringToken)
@@ -195,6 +197,7 @@ func Analyze(md string) []Token {
 			continue
 		}
 
+		// 番号付きリスト TOrderList の数字部分は適当な数字が入るので、正規表現で調べる
 		orderListReg := regexp.MustCompile(`^\d+\.`)
 		orderListMatch := orderListReg.FindString(md[i:])
 		if orderListMatch != "" {
@@ -203,6 +206,7 @@ func Analyze(md string) []Token {
 			continue
 		}
 
+		// 文字列トークン TText は前回のトークンが TText だったとき、別トークンとはしない
 		if stringToken == nil {
 			stringToken = tokenOf(TText)
 		}
@@ -218,20 +222,12 @@ func Analyze(md string) []Token {
 	return tokens
 }
 
-func (t *Token) String() string {
-	if t.Type == TText {
-		return t.Value
-	}
-	return string(t.Type)
-}
-
 func tokenOf(t TokenType) *Token {
 	return &Token{
 		Type: t,
 	}
 }
 
-// 長さが足りないとき、len(substr(s)) < length となることがある
 func substr(str string, begin, length int) string {
 	l := len(str)
 	if l < begin {
