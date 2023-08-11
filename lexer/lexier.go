@@ -1,4 +1,4 @@
-package lexier
+package lexer
 
 import "regexp"
 
