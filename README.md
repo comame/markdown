@@ -4,12 +4,9 @@ An simplefied GitHub-like markdown parser written in go.
 
 # Markdown spec (non-exhaustive)
 
-## Assumptions
 
 - Blocks are bounded by blank lines
 - Blocks except lists does not contain blocks
-
-## Constraints
 
 - Escaping by backslash are always done (including text in Code blocks, Autolinks etc.)
 - Thematic breaks is only `---`
