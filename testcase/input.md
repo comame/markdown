@@ -15,7 +15,7 @@ _italic and **bold**_
 
 `inline code`
 
-[link](https://example.com) ![image](https://example.com)
+[link](https://example.com) ![image](https://example.com) <https://example.com>
 
 Escape \`backquote`
 

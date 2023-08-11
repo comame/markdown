@@ -203,6 +203,21 @@ func Analyze(md string) []Token {
 	return tokens
 }
 
+func (t *Token) String() string {
+	if t.Type == TText {
+		return t.Value
+	}
+	return string(t.Type)
+}
+
+func TokensToString(tokens []Token) string {
+	str := ""
+	for _, t := range tokens {
+		str += t.String()
+	}
+	return str
+}
+
 func tokenOf(t TokenType) *Token {
 	return &Token{
 		Type: t,
